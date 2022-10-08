@@ -11,7 +11,6 @@ const userSchema = new Schema({
 	},
 	token: {
 		type: String,
-		required: true,
 	},
 	dashboard :[{
 		type: String,

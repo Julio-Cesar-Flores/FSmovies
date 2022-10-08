@@ -1,5 +1,27 @@
 type Query {
   getMovies: [Movie!]
+  getUsers: [User]
+}
+
+type Mutation {
+  createUser(usuario: String!, password: String!): User
+  deleteUser(id: String!): Result
+  createMovie(
+    titulo: String!
+    image: String!
+    descripcion: String!
+    likes: Int!
+  ): Movie
+  deleteMovie(id: String!): Result
+  incMovieLikes(id: String!): Result
+}
+
+type User {
+  _id: ID!
+  usuario: String!
+  password: String!
+  token: String!
+  dashboard: [String!]
 }
 
 type Movie {
@@ -10,12 +32,7 @@ type Movie {
   likes: Int!
 }
 
-type Mutation {
-  createMovie(titulo: String!, image: String!, descripcion: String!, likes: Int!): Movie
-  deleteMovie( id: String!) : Result
-}
-
 type Result {
-  Ok: Boolean,
+  Ok: Boolean
   Msg: String
 }

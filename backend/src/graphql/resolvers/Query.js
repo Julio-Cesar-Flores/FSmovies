@@ -1,8 +1,14 @@
-import Movies from "../../models/Movie.js";
+import Movie from "../../models/Movie.js";
+import User from "../../models/User.js";
 
 const Query = {
-  getMovies: async () => {
-    return await Movies.find();
+  getMovies: async (_, _args, ctx) => {
+    //console.log(ctx.request.get('x-foo')); old version?
+    //En docs dice context.request.headers.get('x-foo')
+    return await Movie.find();
+  },
+  getUsers: async (_, _args, ctx) => {
+    return await User.find();
   },
 };
 

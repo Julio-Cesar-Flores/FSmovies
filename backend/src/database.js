@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 mongoose
-	.connect("mongodb://localhost/testdb", {
+	.connect("mongodb://localhost/FSmovies", {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 	})

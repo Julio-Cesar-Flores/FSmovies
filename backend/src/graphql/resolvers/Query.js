@@ -1,10 +1,9 @@
-import Message from "../../models/Message";
+import Movies from "../../models/Movie.js";
 
 const Query = {
-
-    getMessages: async () => {
-        return await Message.find();
-    }
+  getMovies: async () => {
+    return await Movies.find();
+  },
 };
 
 export default Query;

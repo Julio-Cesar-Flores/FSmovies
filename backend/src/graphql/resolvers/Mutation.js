@@ -1,12 +1,28 @@
-import Message from "../../models/Message";
+import mongoose from "mongoose";
+import Movie from "../../models/Movie.js";
 
 const Mutation = {
-  createMessage: async (_, { title, content, author }) => {
-    const newMessage = new Message({ title, content, author });
-    return await newMessage.save();
+  createMovie: async (_, { titulo, image, descripcion, likes }) => {
+    const newMovie = new Movie({ titulo, image, descripcion, likes });
+    return await newMovie.save();
   },
-  deleteMessage: async (_, { _id }) => {    
-    return await Message.deleteOne(_id) ;
+  deleteMovie: async (_, { id }) => {
+    let Msg, Ok, _id;
+    try {
+      _id = mongoose.Types.ObjectId(id);
+      const M = await Movie.findByIdAndDelete(_id);
+      if (!M) {
+        Ok = false;
+        Msg = "Not found";
+      } else {
+        Ok = true;
+        Msg = "Deleted: " + M.titulo;
+      }
+    } catch (error) {
+      Ok = false;
+      Msg = error;
+    }
+    return { Ok, Msg };
   },
 };
 

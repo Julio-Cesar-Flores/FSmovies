@@ -1,14 +1,21 @@
 type Query {
-  getMessages: [Message!]
+  getMovies: [Movie!]
 }
 
-type Message {
+type Movie {
   _id: ID!
-  title: String!
-  content: String!
-  author: String!
+  titulo: String!
+  image: String!
+  descripcion: String!
+  likes: Int!
 }
 
 type Mutation {
-  createMessage(title: String!, content: String!, author: String!): Message
+  createMovie(titulo: String!, image: String!, descripcion: String!, likes: Int!): Movie
+  deleteMovie( id: String!) : Result
+}
+
+type Result {
+  Ok: Boolean,
+  Msg: String
 }

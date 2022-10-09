@@ -1,10 +1,29 @@
 import mongoose from "mongoose";
+import jwt from "jwt-simple";
 import bcrypt from "bcrypt";
 
 import Movie from "../../models/Movie.js";
 import User from "../../models/User.js";
 
+const JWT_SECRET = "configDB.jwt.secret";
+
 const Mutation = {
+  addDashBoard: async (_, { tkn, id }, ctx) => {
+    const { userId } = jwt.decode(tkn, JWT_SECRET);
+    let _id = mongoose.Types.ObjectId(userId);
+    const user = await User.findById(_id);
+    if (!user) {
+      return null;
+    }
+    _id = mongoose.Types.ObjectId(id);
+    const film = await Movie.findById(_id);
+    if (!film) {
+      return null;
+    }
+    user.dashboard.push(id);
+    user.update();
+    return user;
+  },
   createUser: async (_, { usuario, password }, ctx) => {
     const users = await User.find({ usuario });
     if (users.length > 0) {

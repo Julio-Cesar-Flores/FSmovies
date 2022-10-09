@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import Movie from "../../models/Movie.js";
 import User from "../../models/User.js";
 
+const JWT_SECRET = "configDB.jwt.secret";
 
 const Query = {
   getMovies: async (_, _args, ctx) => {
@@ -15,7 +16,7 @@ const Query = {
     return await User.find();
   },
   findUser: async (_, { usuario, password }, ctx) => {
-    console.log("jwtSecret", JWT_SECRET);
+    //console.log("jwtSecret", JWT_SECRET);
     const users = await User.find({ usuario });
     if (users.length == 0) {
       return [];
@@ -30,7 +31,7 @@ const Query = {
     const payload = {
       userId: user.id,
     };
-    const token = jwt.encode(payload, "configDB.jwt.secret");
+    const token = jwt.encode(payload, JWT_SECRET );
     user.token = token;
     //user.save();
     return [user];

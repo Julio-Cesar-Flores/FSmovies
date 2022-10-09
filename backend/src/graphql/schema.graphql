@@ -5,6 +5,7 @@ type Query {
 }
 
 type Mutation {
+  addDashBoard(tkn: String!, id: String!): User
   createUser(usuario: String!, password: String!): [User]
   deleteUser(id: String!): Result
   createMovie(
@@ -31,7 +32,7 @@ type Movie {
   titulo: String!
   image: String!
   descripcion: String!
-	nid: Int!
+  nid: Int!
   likes: Int!
 }
 

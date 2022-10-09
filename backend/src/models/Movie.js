@@ -13,6 +13,10 @@ const movieSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	nid:{
+		type: Number,
+		required: true,
+	},	
 	likes:{
 		type: Number,
 		required: true,

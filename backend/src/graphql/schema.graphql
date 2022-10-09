@@ -1,15 +1,17 @@
 type Query {
   getMovies: [Movie!]
   getUsers: [User]
+  findUser(usuario: String!, password: String!): [User]
 }
 
 type Mutation {
-  createUser(usuario: String!, password: String!): User
+  createUser(usuario: String!, password: String!): [User]
   deleteUser(id: String!): Result
   createMovie(
     titulo: String!
     image: String!
     descripcion: String!
+    nid: Int!
     likes: Int!
   ): Movie
   deleteMovie(id: String!): Result
@@ -29,6 +31,7 @@ type Movie {
   titulo: String!
   image: String!
   descripcion: String!
+	nid: Int!
   likes: Int!
 }
 

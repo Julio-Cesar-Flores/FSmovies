@@ -5,18 +5,21 @@ import 'primereact/resources/primereact.min.css' // core css
 import 'primeicons/primeicons.css' // icons
 
 import logo from './assets/oura.jpg'
+const JWT_SECRET = import.meta.env.VITE_JWT_SECRET
 
-const App = () => (
-  <div className='bg'>
-    <div className='App'>
-      <h1>Oura Movies</h1>
-      <img src={logo} alt='Logo' />;
-      <div className='card'>
-        <p>Películas y más</p>
+const App = () => {
+  console.log('Jwt ', JWT_SECRET)
+  return (
+    <div className='bg'>
+      <div className='App'>
+        <h1>Oura Movies</h1>
+        <img src={logo} alt='Logo' />;
+        <div className='card'>
+          <p>Películas y más</p>
+        </div>
+        <p className='read-the-docs'>Login</p>
       </div>
-      <p className='read-the-docs'>Login</p>
     </div>
-  </div>
-)
-
+  )
+}
 export default App

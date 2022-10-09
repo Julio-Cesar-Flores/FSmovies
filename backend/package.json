@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "nodemon src/index.js --exec babel-node"
+    "dev": "nodemon src/index.js --exec babel-node"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +16,9 @@
     "@babel/node": "^7.19.1",
     "@babel/plugin-transform-runtime": "^7.19.1",
     "@babel/preset-env": "^7.19.3",
+    "bcrypt": "^5.1.0",
     "graphql-yoga": "^1.18.3",
+    "jwt-simple": "^0.5.6",
     "mongoose": "^6.6.2",
     "nodemon": "^2.0.20"
   }

@@ -1,11 +1,24 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+
 import Movie from "../../models/Movie.js";
 import User from "../../models/User.js";
 
 const Mutation = {
   createUser: async (_, { usuario, password }, ctx) => {
-    const newUser = new User({ usuario, password, token: "", dashboard: [] });
-    return await newUser.save();
+    const users = await User.find({ usuario });
+    if (users.length > 0) {
+      return [];
+    }
+    const encryptedPass = await bcrypt.hash(password, 4);
+    let newUser = new User({
+      usuario,
+      password: encryptedPass,
+      token: "",
+      dashboard: [],
+    });
+    newUser = await newUser.save();
+    return [newUser];
   },
   deleteUser: async (_, { id }, ctx) => {
     let Msg, Ok, _id;
@@ -21,10 +34,17 @@ const Mutation = {
     }
     return { Ok, Msg };
   },
-  createMovie: async (_, { titulo, image, descripcion, likes }, ctx) => {
-    console.log("Del ", ctx);
-    const newMovie = new Movie({ titulo, image, descripcion, likes });
-    return await newMovie.save();
+  createMovie: async (_, newData, ctx) => {
+    //{ nid, titulo, image, descripcion, likes }
+    const { nid } = newData;
+    let doc = await Movie.findOneAndUpdate({ nid }, newData, { upsert: true });
+
+    /*let doc = await Movie.findOne({ nid });
+    if (!doc) {
+      doc = new Movie({ nid, titulo, image, descripcion, likes });
+      doc = await doc.save();
+    }*/
+    return doc;
   },
   deleteMovie: async (_, { id }, ctx) => {
     let Msg, Ok, _id;

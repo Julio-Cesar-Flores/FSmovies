@@ -1,4 +1,5 @@
 type Query {
+  getDashBoard(tkn: String!):UserMovies
   getMovies: [Movie!]
   getUsers: [User]
   findUser(usuario: String!, password: String!): [User]
@@ -17,6 +18,14 @@ type Mutation {
   ): Movie
   deleteMovie(id: String!): Result
   incMovieLikes(id: String!): Result
+}
+
+type UserMovies {
+  _id: ID!
+  usuario: String!
+  password: String!
+  token: String!
+  dashboard: [Movie]
 }
 
 type User {

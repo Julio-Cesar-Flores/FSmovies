@@ -20,8 +20,8 @@ const Mutation = {
     if (!film) {
       return null;
     }
-    user.dashboard.push(id);
-    user.update();
+    user.dashboard.push(_id);
+    await user.save();
     return user;
   },
   createUser: async (_, { usuario, password }, ctx) => {

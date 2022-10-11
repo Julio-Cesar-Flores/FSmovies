@@ -13,7 +13,7 @@ const userSchema = new Schema({
 		type: String,
 	},
 	dashboard :[{
-		type: String,
+		type: Schema.Types.ObjectId,
 		required: true,
 	}],
 });
